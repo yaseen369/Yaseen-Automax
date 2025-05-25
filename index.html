@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yaseen Abdelmoniem - Backend Developer</title>
+    <title>Yaseen's - Car Sales Calculator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,805 +14,839 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-        }
-
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f0f23);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Make sure all content is visible by default */
-        .reveal {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            transition: all 0.3s ease;
-        }
-
-        /* Header */
-        header {
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(156, 39, 176, 0.1));
-            padding: 2rem;
+            flex-direction: column;
+            animation: backgroundShift 15s ease-in-out infinite alternate;
         }
 
-        .hero-content {
-            text-align: center;
-            z-index: 2;
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
-        .profile-container {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0, #ff6b35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            margin: 0 auto;
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .profile-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 50px rgba(0, 212, 255, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 80px rgba(156, 39, 176, 0.4); }
-            100% { transform: scale(1); box-shadow: 0 0 50px rgba(0, 212, 255, 0.3); }
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0, #ff6b35);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: #b0b0b0;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            color: white !important;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
-            color: white !important;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            transform: translateY(-2px);
-        }
-
-        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 20px;
+            flex-grow: 1;
         }
 
-        /* Sections */
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 3rem;
+        header {
             text-align: center;
-            margin-bottom: 4rem;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px 0;
             position: relative;
+            overflow: hidden; /* For particles or subtle animations */
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            border-radius: 2px;
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease-out;
         }
 
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s;
         }
 
-        .about-image {
-            position: relative;
-        }
-
-        .about-img {
-            width: 300px;
-            height: 400px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            border-radius: 20px;
+        .profile-photo {
+            width: 120px; /* Increased size */
+            height: 120px; /* Increased size */
+            border-radius: 50%;
+            background: #4a4a6e; /* Placeholder background */
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 6rem;
+            font-size: 1.5rem;
             color: white;
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
-            transition: transform 0.3s ease;
             overflow: hidden;
+            border: 3px solid #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+            animation: zoomIn 0.8s ease-out;
         }
 
-        .about-img img {
+        .profile-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 20px;
         }
 
-        .about-img:hover {
-            transform: rotateY(10deg) rotateX(5deg);
-        }
-
-        .floating-icons {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        .floating-icon {
-            position: absolute;
-            font-size: 2rem;
-            color: #00d4ff;
-            animation: floatIcon 4s ease-in-out infinite;
-        }
-
-        .floating-icon:nth-child(1) { top: 10%; left: -20%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 30%; right: -20%; animation-delay: 1s; }
-        .floating-icon:nth-child(3) { bottom: 20%; left: -15%; animation-delay: 2s; }
-        .floating-icon:nth-child(4) { bottom: 10%; right: -15%; animation-delay: 3s; }
-
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
-        }
-
-        .about-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #00d4ff;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            color: #b0b0b0;
-        }
-
-        .skills-container {
-            margin-top: 3rem;
-        }
-
-        .skills-grid {
+        .main-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
-        .skill-card {
-            background: rgba(0, 212, 255, 0.05);
-            padding: 2rem;
+        .card {
+            background: rgba(255, 255, 255, 0.08); /* Slightly transparent white */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
             border-radius: 15px;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all 0.3s ease;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .card h2 {
+            color: #90d4ed; /* Light blue for headings */
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 3px solid #90d4ed;
+            padding-bottom: 10px;
             position: relative;
-            overflow: hidden;
         }
 
-        .skill-card:hover {
-            transform: translateY(-5px);
-            background: rgba(0, 212, 255, 0.1);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+        .card h2::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: #764ba2; /* Accent color */
+            bottom: -3px;
+            left: 0;
+            animation: underlinePulse 2s infinite alternate;
         }
 
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00d4ff;
+        @keyframes underlinePulse {
+            0% { width: 40px; }
+            100% { width: 80px; }
         }
 
-        .skill-name {
-            font-size: 1.2rem;
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            color: #c0c0c0;
+            font-size: 1.1rem;
         }
 
-        .skill-level {
-            color: #9c27b0;
-            font-size: 0.9rem;
-        }
-
-        /* Portfolio section */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            justify-items: center;
-        }
-
-        .portfolio-item {
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            max-width: 700px;
+        select, input[type="number"], input[type="range"] {
             width: 100%;
+            padding: 14px;
+            border: 2px solid #4a4a6e; /* Darker border */
+            border-radius: 10px;
+            font-size: 17px;
+            background: #2a2a4a; /* Darker input background */
+            color: #e0e0e0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            background: rgba(0, 212, 255, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        select:focus, input:focus {
+            outline: none;
+            border-color: #90d4ed;
+            box-shadow: 0 0 0 4px rgba(144, 212, 237, 0.3);
         }
 
-        .portfolio-img {
-            height: 200px;
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.2), rgba(156, 39, 176, 0.2));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: #00d4ff;
+        .range-container {
+            position: relative;
         }
 
-        .portfolio-content {
-            padding: 2rem;
+        .range-value {
+            position: absolute;
+            right: 0;
+            top: -30px;
+            background: #764ba2; /* Accent background */
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            transform: scale(0.9);
+            transform-origin: right;
+            animation: popIn 0.3s ease-out;
         }
 
-        .portfolio-title {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #00d4ff;
-            font-weight: 600;
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .portfolio-desc {
-            color: #b0b0b0;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #90d4ed; /* Thumb color */
+            cursor: grab;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(144, 212, 237, 0.5);
         }
 
-        .portfolio-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #764ba2;
+            transform: scale(1.1);
         }
 
-        .tech-tag {
-            background: rgba(156, 39, 176, 0.2);
-            color: #9c27b0;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(156, 39, 176, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .tech-tag:hover {
-            background: rgba(156, 39, 176, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .languages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .language-card {
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(156, 39, 176, 0.1));
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
+        .calculate-btn {
+            background: linear-gradient(135deg, #90d4ed 0%, #764ba2 100%); /* Blue to purple gradient */
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 10px;
+            font-size: 19px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             position: relative;
             overflow: hidden;
         }
 
-        .language-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            transition: all 0.75s ease-out;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
         }
 
-        .language-flag {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .calculate-btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
         }
 
-        .language-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        .calculate-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(144, 212, 237, 0.4);
+            letter-spacing: 2px;
         }
 
-        .language-level {
-            color: #00d4ff;
-            font-weight: 500;
+        .results {
+            background: linear-gradient(135deg, #2b6a78 0%, #0a3d62 100%); /* Dark teal/blue gradient */
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: slideInUp 0.7s ease-out forwards;
         }
 
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-card {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(156, 39, 176, 0.1));
-            padding: 2.5rem 1.5rem;
-            border-radius: 20px;
+        .results h3 {
+            margin-bottom: 25px;
+            font-size: 1.8rem;
             text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 15px;
+            color: #a7e9ff;
         }
 
-        .contact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00d4ff;
-        }
-
-        .contact-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .contact-info {
-            color: #b0b0b0;
-            font-size: 1rem;
-        }
-
-        .contact-link {
-            color: #9c27b0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-
-        .contact-link:hover {
-            color: #00d4ff;
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(45deg, #0a0a0a, #1a1a2e);
-            padding: 3rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .footer-content {
+        .result-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.15);
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
         }
 
-        .footer-text {
-            color: #b0b0b0;
+        .result-item:nth-child(2) { animation-delay: 0.1s; }
+        .result-item:nth-child(3) { animation-delay: 0.2s; }
+        .result-item:nth-child(4) { animation-delay: 0.3s; }
+        .result-item:nth-child(5) { animation-delay: 0.4s; }
+        .result-item:nth-child(6) { animation-delay: 0.5s; }
+        .result-item:nth-child(7) { animation-delay: 0.6s; }
+        .result-item:last-child { animation-delay: 0.7s; }
+
+
+        .result-item:last-child {
+            border-bottom: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255,255,255,0.4);
+            color: #a7e9ff;
+        }
+        
+        .result-item span:first-child {
+            color: #d0d0d0;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
+        .car-showcase {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            animation: slideInDown 0.8s ease-out;
         }
 
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .car-card {
+            border: 2px solid #4a4a6e;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .car-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(144, 212, 237, 0.1);
+            transform: scale(0);
             border-radius: 50%;
+            transition: all 0.5s ease-out;
+            z-index: 0;
+        }
+
+        .car-card:hover::before {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+        .car-card:hover {
+            border-color: #90d4ed;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(144, 212, 237, 0.2);
+        }
+
+        .car-card.selected {
+            border-color: #90d4ed;
+            background: rgba(144, 212, 237, 0.15);
+            box-shadow: 0 0 20px rgba(144, 212, 237, 0.6);
+            transform: scale(1.03);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #2a2a4a 0%, #4a4a6e 100%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: #90d4ed;
+            transition: transform 0.3s ease;
+        }
+        .car-card:hover .car-image {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .car-card h3 {
             color: white;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .car-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #38ef7d; /* Green for price */
+            margin-top: 10px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .discount-badge {
+            background: #e74c3c; /* Red for discount */
+            color: white;
+            padding: 6px 12px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            animation: bounceIn 0.5s ease-out;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #c0c0c0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px 15px 0 0;
+            animation: fadeInUp 1s ease-out 0.8s;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        footer .thank-you-message {
             font-size: 1.5rem;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #90d4ed;
+            animation: textColorChange 5s infinite alternate;
         }
 
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        @keyframes textColorChange {
+            0% { color: #90d4ed; }
+            50% { color: #38ef7d; }
+            100% { color: #764ba2; }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
                 font-size: 2.5rem;
             }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 10px;
             }
 
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
+            .card {
+                padding: 20px;
             }
 
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
+            .car-card {
+                padding: 15px;
             }
 
-            .section-title {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 50px 0;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
+            .car-image {
+                height: 150px;
+                font-size: 3rem;
             }
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        ::-webkit-scrollbar-track {
-            background: #1a1a2e;
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            border-radius: 4px;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Ensure smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo">YA</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Header -->
-    <header id="home">
-        <div class="hero-content reveal">
-            <div class="profile-container">
-                <div class="profile-img">
-                    <img src="image.jpg" alt="Yaseen Abdelmoniem" onerror="this.style.display='none'; this.parentElement.innerHTML='👨‍💻';">
-                </div>
+    <div class="container">
+        <header>
+            <div class="profile-photo">
+                <img src="image.jpg" alt="Your Photo">
             </div>
-            <h1 class="hero-title">Yaseen Abdelmoniem</h1>
-            <p class="hero-subtitle">Backend Developer & System Architect</p>
-            <a href="#contact" class="cta-button">Let's Connect</a>
+            <h1>🚗 Yaseen's AutoMax</h1>
+            <p class="subtitle">Premium Car Sales & Finance Calculator</p>
+            <p class="subtitle">ECC005 Final Project</p>
+        </header>
+
+        <div class="car-showcase card">
+            <h2>🏆 Featured Vehicles</h2>
+            <div class="car-grid" id="carGrid">
+                </div>
         </div>
-    </header>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title reveal">About Me</h2>
-            <div class="about-grid">
-                <div class="about-image reveal">
-                    <div class="about-img">
-                        <img src="image2.jpg" alt="Yaseen at work" onerror="this.style.display='none'; this.parentElement.innerHTML='🚀';">
+        <div class="main-content">
+            <div class="card">
+                <h2>💰 Loan Calculator</h2>
+                <form id="calculatorForm">
+                    <div class="form-group">
+                        <label for="selectedCar">Selected Vehicle:</label>
+                        <select id="selectedCar">
+                            <option value="">Choose a car first</option>
+                        </select>
                     </div>
-                    <div class="floating-icons">
-                        <div class="floating-icon">🐍</div>
-                        <div class="floating-icon">☕</div>
-                        <div class="floating-icon">⚡</div>
-                        <div class="floating-icon">🔧</div>
-                    </div>
-                </div>
-                <div class="about-content reveal">
-                    <h3>Building Tomorrow's Systems Today</h3>
-                    <p class="about-text">
-                        My name is Yaseen, a 20-year-old software developer currently pursuing a Bachelor's degree at Near East University. I have strong, hands-on experience in backend development, with proficiency in Python, Java, and C++. I am passionate about building scalable and efficient systems and continuously expanding my technical skills.
-                    </p>
-                    <p class="about-text">
-                        I love teamwork and adaptability, and I'm always willing to learn new technologies and take on challenging projects. My goal is to create robust backend solutions that power amazing user experiences.
-                    </p>
-                </div>
-            </div>
 
-            <!-- Languages Section -->
-            <div class="skills-container reveal">
-                <h3 style="font-size: 2rem; margin-bottom: 2rem; color: #00d4ff; text-align: center;">Languages I Speak</h3>
-                <div class="languages-grid">
-                    <div class="language-card">
-                        <div class="language-flag">🇸🇦</div>
-                        <div class="language-name">Arabic</div>
-                        <div class="language-level">Native (10/10)</div>
-                    </div>
-                    <div class="language-card">
-                        <div class="language-flag">🇺🇸</div>
-                        <div class="language-name">English</div>
-                        <div class="language-level">Advanced (8.5/10)</div>
-                    </div>
-                    <div class="language-card">
-                        <div class="language-flag">🇹🇷</div>
-                        <div class="language-name">Turkish</div>
-                        <div class="language-level">Intermediate (6/10)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="container">
-            <h2 class="section-title reveal">Featured Project</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item reveal">
-                    <div class="portfolio-img">⚡</div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">Universal Web App & Bot Performance Tester</h3>
-                        <p class="portfolio-desc">A sophisticated website monitoring and performance analysis tool that executes comprehensive HTTP requests to target websites, capturing critical performance metrics including response times and HTTP status codes. The system intelligently stores collected data in a local SQLite database, generates insightful visual analytics, and exports detailed reports in both CSV and PDF formats.</p>
-                        <p class="portfolio-desc" style="margin-top: 1rem; font-style: italic;">This tool serves as an essential asset for Quality Assurance teams conducting uptime and responsiveness testing, System administrators requiring lightweight monitoring reports, and Developers performing pre-deployment performance validation.</p>
-                        <div class="portfolio-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">SQLite</span>
-                            <span class="tech-tag">Data Visualization</span>
-                            <span class="tech-tag">Performance Testing</span>
-                            <span class="tech-tag">Report Generation</span>
+                    <div class="form-group">
+                        <label for="downPayment">Down Payment ($):</label>
+                        <div class="range-container">
+                            <input type="range" id="downPayment" min="0" max="50000" value="5000" step="500">
+                            <span class="range-value" id="downPaymentValue">$5,000</span>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="loanTerm">Loan Term (Years):</label>
+                        <select id="loanTerm">
+                            <option value="3">3 Years</option>
+                            <option value="4">4 Years</option>
+                            <option value="5" selected>5 Years</option>
+                            <option value="6">6 Years</option>
+                            <option value="7">7 Years</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interestRate">Interest Rate (%):</label>
+                        <div class="range-container">
+                            <input type="range" id="interestRate" min="1" max="15" value="6.5" step="0.1">
+                            <span class="range-value" id="interestRateValue">6.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tradeInValue">Trade-in Value ($):</label>
+                        <input type="number" id="tradeInValue" min="0" value="0" placeholder="Enter trade-in value">
+                    </div>
+
+                    <button type="button" class="calculate-btn" onclick="calculateLoan()">
+                        Calculate Payment
+                    </button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📊 Payment Breakdown</h2>
+                <div id="results">
+                    <p style="text-align: center; color: #999; margin-top: 50px;">
+                        Select a car and calculate to see your payment breakdown
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title reveal">Technical Arsenal</h2>
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <div class="skill-icon">🐍</div>
-                    <div class="skill-name">Python</div>
-                    <div class="skill-level">Advanced Backend Development</div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">☕</div>
-                    <div class="skill-name">Java</div>
-                    <div class="skill-level">Enterprise Applications</div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">⚡</div>
-                    <div class="skill-name">C++</div>
-                    <div class="skill-level">System Programming</div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">🗄️</div>
-                    <div class="skill-name">Database Design</div>
-                    <div class="skill-level">SQL & NoSQL</div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">🌐</div>
-                    <div class="skill-name">API Development</div>
-                    <div class="skill-level">RESTful Services</div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">🔧</div>
-                    <div class="skill-name">System Architecture</div>
-                    <div class="skill-level">Scalable Solutions</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title reveal">Let's Build Something Amazing</h2>
-            <p style="text-align: center; font-size: 1.2rem; color: #b0b0b0; margin-bottom: 3rem;" class="reveal">
-                Ready to collaborate on your next big project? Let's connect and make it happen!
-            </p>
-            <div class="contact-grid">
-                <div class="contact-card reveal">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-title">Email</div>
-                    <div class="contact-info">
-                        <a href="mailto:yaseenhakeem199@gmail.com" class="contact-link">yaseenhakeem199@gmail.com</a>
-                    </div>
-                </div>
-                <div class="contact-card reveal">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-title">LinkedIn</div>
-                    <div class="contact-info">
-                        <a href="https://www.linkedin.com/in/yaseen-abdelrhman-905aaa253/" class="contact-link" target="_blank">Connect with me</a>
-                    </div>
-                </div>
-                <div class="contact-card reveal">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-title">Phone</div>
-                    <div class="contact-info">
-                        <a href="tel:+905488665458" class="contact-link">+90 548 866 5458</a>
-                    </div>
-                </div>
-                <div class="contact-card reveal">
-                    <div class="contact-icon">🐙</div>
-                    <div class="contact-title">GitHub</div>
-                    <div class="contact-info">
-                        <a href="#" class="contact-link" target="_blank">View my repositories</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    © 2025 Yaseen Abdelmoniem. Crafted with passion for backend excellence.
-                </div>
-                <div class="social-links">
-                    <a href="mailto:yaseenhakeem199@gmail.com" class="social-link">📧</a>
-                    <a href="https://www.linkedin.com/in/yaseen-abdelrhman-905aaa253/" class="social-link" target="_blank">💼</a>
-                    <a href="tel:+905488665458" class="social-link">📱</a>
-                    <a href="#" class="social-link" target="_blank">🐙</a>
-                </div>
-            </div>
-        </div>
+        <p class="thank-you-message">Thank you for choosing Yaseen's AutoMax!</p>
+        <p>&copy; 2025 Yaseen's AutoMax. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Car inventory data
+        const cars = [
+            {
+                id: 1,
+                name: "Honda Civic",
+                price: 25000,
+                discount: 2000,
+                icon: "🚗"
+            },
+            {
+                id: 2,
+                name: "Toyota Camry",
+                price: 32000,
+                discount: 3000,
+                icon: "🚙"
+            },
+            {
+                id: 3,
+                name: "BMW X3",
+                price: 55000,
+                discount: 5000,
+                icon: "🚐"
+            },
+            {
+                id: 4,
+                name: "Mercedes C-Class",
+                price: 48000,
+                discount: 4000,
+                icon: "🏎️"
+            },
+            {
+                id: 5,
+                name: "Ford F-150",
+                price: 42000,
+                discount: 3500,
+                icon: "🛻"
+            },
+            {
+                id: 6,
+                name: "Tesla Model 3",
+                price: 45000,
+                discount: 2500,
+                icon: "⚡"
+            }
+        ];
+
+        let selectedCarId = null;
+
+        // Initialize the application
+        function init() {
+            populateCarGrid();
+            setupEventListeners();
+            updateRangeValues();
+        }
+
+        // Populate the car grid
+        function populateCarGrid() {
+            const carGrid = document.getElementById('carGrid');
+            const carSelect = document.getElementById('selectedCar');
+            
+            carGrid.innerHTML = '';
+            carSelect.innerHTML = '<option value="">Select a vehicle</option>';
+
+            cars.forEach(car => {
+                // Create car card
+                const carCard = document.createElement('div');
+                carCard.className = 'car-card';
+                carCard.onclick = () => selectCar(car.id);
+                
+                const finalPrice = car.price - car.discount;
+                
+                carCard.innerHTML = `
+                    <div class="car-image">${car.icon}</div>
+                    <h3>${car.name}</h3>
+                    <div class="car-price">$${finalPrice.toLocaleString()}</div>
+                    <div class="original-price">$${car.price.toLocaleString()}</div>
+                    <div class="discount-badge">Save $${car.discount.toLocaleString()}</div>
+                `;
+                
+                carGrid.appendChild(carCard);
+
+                // Add to select dropdown
+                const option = document.createElement('option');
+                option.value = car.id;
+                option.textContent = `${car.name} - $${finalPrice.toLocaleString()}`;
+                carSelect.appendChild(option);
+            });
+        }
+
+        // Select a car
+        function selectCar(carId) {
+            selectedCarId = carId;
+            
+            // Update visual selection
+            document.querySelectorAll('.car-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Update dropdown
+            document.getElementById('selectedCar').value = carId;
+            
+            // Auto-calculate if form is complete
+            calculateLoan();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            document.getElementById('selectedCar').addEventListener('change', function() {
+                if (this.value) {
+                    selectCarFromDropdown(parseInt(this.value));
+                }
+            });
+
+            // Range input listeners
+            document.getElementById('downPayment').addEventListener('input', updateRangeValues);
+            document.getElementById('interestRate').addEventListener('input', updateRangeValues);
+            
+            // Auto-calculate on input change
+            document.querySelectorAll('select, input').forEach(input => {
+                input.addEventListener('change', () => {
+                    if (selectedCarId) calculateLoan();
+                });
+            });
+        }
+
+        // Select car from dropdown
+        function selectCarFromDropdown(carId) {
+            selectedCarId = carId;
+            
+            // Update visual selection
+            document.querySelectorAll('.car-card').forEach((card, index) => {
+                card.classList.remove('selected');
+                if (cars[index].id === carId) {
+                    card.classList.add('selected');
+                }
+            });
+            
+            calculateLoan();
+        }
+
+        // Update range slider values
+        function updateRangeValues() {
+            const downPayment = document.getElementById('downPayment').value;
+            const interestRate = document.getElementById('interestRate').value;
+            
+            document.getElementById('downPaymentValue').textContent = `$${parseInt(downPayment).toLocaleString()}`;
+            document.getElementById('interestRateValue').textContent = `${interestRate}%`;
+        }
+
+        // Calculate loan payment
+        function calculateLoan() {
+            if (!selectedCarId) {
+                document.getElementById('results').innerHTML = `
+                    <p style="text-align: center; color: #999; margin-top: 50px;">
+                        Please select a vehicle first
+                    </p>
+                `;
+                return;
+            }
+
+            // Get form values
+            const car = cars.find(c => c.id === selectedCarId);
+            const vehiclePrice = car.price - car.discount;
+            const downPayment = parseInt(document.getElementById('downPayment').value);
+            const loanTerm = parseInt(document.getElementById('loanTerm').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const tradeInValue = parseInt(document.getElementById('tradeInValue').value) || 0;
+
+            // Calculate loan details
+            const totalDiscount = car.discount + (tradeInValue > 0 ? tradeInValue : 0);
+            const loanAmount = vehiclePrice - downPayment - tradeInValue;
+            const monthlyRate = interestRate / 100 / 12;
+            const numPayments = loanTerm * 12;
+
+            let monthlyPayment = 0;
+            let totalInterest = 0;
+            let totalPayment = 0;
+
+            if (loanAmount > 0 && monthlyRate > 0) {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                                (Math.pow(1 + monthlyRate, numPayments) - 1);
+                totalPayment = monthlyPayment * numPayments;
+                totalInterest = totalPayment - loanAmount;
+            } else if (loanAmount > 0) {
+                monthlyPayment = loanAmount / numPayments;
+                totalPayment = loanAmount;
+                totalInterest = 0;
+            }
+
+            // Display results
+            displayResults({
+                car: car,
+                vehiclePrice: vehiclePrice,
+                discount: car.discount,
+                tradeInValue: tradeInValue,
+                totalDiscount: totalDiscount,
+                downPayment: downPayment,
+                loanAmount: loanAmount,
+                monthlyPayment: monthlyPayment,
+                totalInterest: totalInterest,
+                totalPayment: totalPayment + downPayment + tradeInValue,
+                loanTerm: loanTerm
+            });
+        }
+
+        // Display calculation results
+        function displayResults(calc) {
+            const resultsDiv = document.getElementById('results');
+            
+            resultsDiv.innerHTML = `
+                <div class="results fade-in">
+                    <h3>💵 ${calc.car.name} Payment Summary</h3>
+                    
+                    <div class="result-item">
+                        <span>Original Vehicle Price:</span>
+                        <span>$${calc.car.price.toLocaleString()}</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span>Discount:</span>
+                        <span style="color: #e74c3c;">-$${calc.discount.toLocaleString()}</span>
+                    </div>
+                    
+                    ${calc.tradeInValue > 0 ? `
+                    <div class="result-item">
+                        <span>Trade-in Value:</span>
+                        <span style="color: #e74c3c;">-$${calc.tradeInValue.toLocaleString()}</span>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="result-item">
+                        <span>Final Sale Price:</span>
+                        <span>$${calc.vehiclePrice.toLocaleString()}</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span>Down Payment:</span>
+                        <span>$${calc.downPayment.toLocaleString()}</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span>Amount to Finance:</span>
+                        <span>$${calc.loanAmount.toLocaleString()}</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span>Estimated Interest (over ${calc.loanTerm} years):</span>
+                        <span>$${calc.totalInterest.toLocaleString()}</span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span>Approx. Monthly Payment:</span>
+                        <span style="font-size: 1.3em;">$${calc.monthlyPayment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize the app when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
